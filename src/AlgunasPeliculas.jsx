@@ -128,6 +128,7 @@ function AlgunasPeliculas() {
                     <h2>{e.Title}</h2>
                     <img src={e.Poster} alt={e.Title} />
                     <h2>{e.Year}</h2>
+                    
                 </div>
             ))}
         </>

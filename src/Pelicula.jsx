@@ -1,17 +1,33 @@
-import api from "./api"
+import { useEffect, useState } from "react";
+import api from "./api";
 
-function Pelicula(Nombre){
-    let dataP = api.buscarPelicula(Nombres)
+function Pelicula({ PeliculaActual }) {
+
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        if (!PeliculaActual) return;
+
+        const fetchData = async () => {
+            const res = await api.buscarPelicula(PeliculaActual);
+            setData(res);
+        };
+
+        fetchData();
+    }, [PeliculaActual]); 
+
+    if (!data) return <h2>Buscá una película...</h2>;
+
+
     return (
         <>
-            <h1>{dataP["Title"]}</h1>
-            <img src={dataP["Poster"]}/>
-            <h3>Año: {dataP["Year"]}</h3>
-            <h3>Genero: {dataP["Genre"]}</h3>
-            <h4>Director: {dataP["Director"]}</h4>
+            <h1>{data.Title}</h1>
+            <img src={data.Poster} alt={data.Title} />
+            <h3>Año: {data.Year}</h3>
+            <h3>Género: {data.Genre}</h3>
+            <h4>Director: {data.Director}</h4>
         </>
-    )
+    );
 }
 
-
-export default Pelicula
+export default Pelicula;
