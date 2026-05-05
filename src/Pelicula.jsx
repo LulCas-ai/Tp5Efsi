@@ -1,33 +1,34 @@
 import { useEffect, useState } from "react";
 import api from "./api";
 
-function Pelicula({ PeliculaActual }) {
+function BuscarPelicula({ idPelicula }) {
 
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        if (!PeliculaActual) return;
+        if (!idPelicula) return;
 
         const fetchData = async () => {
-            const res = await api.buscarPelicula(PeliculaActual);
+            const res = await api.peliculaEspecifica(idPelicula);
             setData(res);
         };
 
         fetchData();
-    }, [PeliculaActual]); 
+    }, [idPelicula]);
 
-    if (!data) return <h2>Buscá una película...</h2>;
-
+    if (!data) return <h2>Cargando...</h2>;
 
     return (
         <>
             <h1>{data.Title}</h1>
             <img src={data.Poster} alt={data.Title} />
             <h3>Año: {data.Year}</h3>
-            <h3>Género: {data.Genre}</h3>
-            <h4>Director: {data.Director}</h4>
+            <h3>Genero: {data.Genre}</h3>
+            <p>Director: {data.Director}</p>
+            <p>Actores: {data.Actors}</p>
+            <p>SInopsis: {data.Plot}</p>
         </>
     );
 }
 
-export default Pelicula;
+export default BuscarPelicula;

@@ -8,18 +8,22 @@ import Pelicula from './Pelicula'
 
 function App() {
 
-  const [PeliculaActual, setPelicula] = useState("")
+  const [Peliculas, setPeliculas] = useState("")
   const [input, setInput] = useState("");
+  const [Pelicula,setPelicula] = useState("")
 
 
   return (
     <>
       <input type="text" onChange={(e) => setInput(e.target.value)}/>
-      <button onClick={() => setPelicula(input)}>
+      <button onClick={() => setPeliculas(input)}>
         Buscar
       </button>
 
-      <Pelicula PeliculaActual = {PeliculaActual} />
+      <AlgunasPeliculas PeliculaActual = {Peliculas} />
+
+
+
     </>
   )
 }
